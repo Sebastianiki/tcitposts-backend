@@ -1,0 +1,20 @@
+const sequelize = require('sequelize')
+
+const connectDB = new sequelize.Sequelize(
+    'tcit',
+    'postgres',
+    'root',
+    {
+        host : 'localhost',
+        dialect : 'postgres',
+        pool : {
+            max:5,
+            min:0,
+            require: 30000,
+            idle: 10000
+        },
+        logging: false
+    }
+)
+
+module.exports = connectDB
