@@ -1,11 +1,18 @@
-const app = require('./app')
+const express = require('express')
+const cors = require('cors')
+const morgan = require('morgan')
+const postRoutes = require('./routes/posts')
 
-async function main(){
-    const PORT = process.env.PORT || 4001
+const app = express()
 
-    await app.listen(PORT, () => {
+app.use(cors())
+app.use(morgan('dev'))
+app.use(express.json({ extend: true }))
+
+app.use('/api/posts', postRoutes)
+
+const PORT = process.env.PORT || 4001
+
+app.listen(PORT, () => {
     console.log(`El servidor esta corriendo en el puerto: ${PORT}`)
 })
-}
-
-main()
